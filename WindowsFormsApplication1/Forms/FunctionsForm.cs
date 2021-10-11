@@ -72,6 +72,7 @@ namespace FuncOperationsApplication
         private void DeleteFuncbtn_Click(object sender, EventArgs e)
         {
             int index = listBox1.SelectedIndex;
+            if (index == -1) return;
             _functions.RemoveAt(index);
             RefreshValues();
         }
