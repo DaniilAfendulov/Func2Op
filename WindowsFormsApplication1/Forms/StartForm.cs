@@ -15,8 +15,7 @@ namespace FuncOperationsApplication
     {
         public LogForm LogForm;
         private List<Function> _functions;
-        AddPointForm AddPointForm1;
-        AddPointForm AddPointForm2;
+        AddPointForm AddPointForm1, AddPointForm2;
         private readonly FunctionsForm  FunctionsForm;
         public StartForm()
         {

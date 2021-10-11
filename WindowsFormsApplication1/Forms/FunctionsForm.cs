@@ -76,7 +76,15 @@ namespace FuncOperationsApplication
         {
             try
             {
-                var f = FuncOpParser.ParseFunction(textBox2.Text);
+                Function f;
+                try
+                {
+                    f = FuncOpParser.ParseFunction(textBox2.Text);
+                }
+                catch (Exception)
+                {
+                    f = new Function(new PointF[] { new PointF(0, 0), new PointF(1, 0), new PointF(2, 0) });
+                }
                 _functions.Add(f);
                 RefreshValues();
             }
