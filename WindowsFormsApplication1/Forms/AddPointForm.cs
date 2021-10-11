@@ -13,14 +13,12 @@ namespace FuncOperationsApplication
     public partial class AddPointForm : Form
     {
         IEnumerable<PointF> points;
-        int _id;
-        StartForm _parantForm;
-        public AddPointForm(int id, StartForm parantForm)
+        FunctionsForm _parentForm;
+        public AddPointForm(FunctionsForm parentForm)
         {
             InitializeComponent();
             points = new List<PointF>();
-            _id = id;
-            _parantForm = parantForm;
+            _parentForm = parentForm;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -32,11 +30,11 @@ namespace FuncOperationsApplication
             try
             {
                 var point = new PointF(float.Parse(textBox1.Text), float.Parse(textBox2.Text));
-                _parantForm.AddPoint(point, _id);
+                _parentForm.AddPoint(point);
             }
             catch (Exception ex)
             {
-                _parantForm.LogForm.AddLogMsgLine(ex.Message);
+                _parentForm.Log(ex.Message);
             }
 
 

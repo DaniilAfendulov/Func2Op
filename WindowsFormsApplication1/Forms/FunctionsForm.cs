@@ -15,6 +15,8 @@ namespace FuncOperationsApplication
     public partial class FunctionsForm : Form
     {
         private List<Function> _functions;
+        private readonly AddPointForm AddPointForm;
+
         public FunctionsForm()
         {
             InitializeComponent();
@@ -29,6 +31,7 @@ namespace FuncOperationsApplication
             listBox1.SelectedIndex = 1;
             listBox1.Select();
 
+            AddPointForm = new AddPointForm(this);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,7 +113,7 @@ namespace FuncOperationsApplication
 
         }
 
-        private void Log(string msg)
+        public void Log(string msg)
         {
             ((StartForm)Owner).LogForm.AddLogMsgLine(msg);
         }
@@ -148,6 +151,11 @@ namespace FuncOperationsApplication
         private void FunctionsForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public void AddPoint(PointF point)
+        {
+            textBox2.AppendText((string.IsNullOrEmpty(textBox2.Text) ? "" : ";") + point.X + " " + point.Y);
         }
 
     }

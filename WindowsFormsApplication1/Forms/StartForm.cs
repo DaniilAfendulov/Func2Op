@@ -15,20 +15,14 @@ namespace FuncOperationsApplication
     {
         public LogForm LogForm;
         private List<Function> _functions;
-        AddPointForm AddPointForm1, AddPointForm2;
         private readonly FunctionsForm  FunctionsForm;
         public StartForm()
         {
             InitializeComponent();
             LogForm = new LogForm();
             LogForm.Show();
-            AddPointForm1 = new AddPointForm(1, this);
-            AddPointForm2 = new AddPointForm(2, this);
             _functions = new List<Function>();
-            _functions.Add(FuncOpParser.ParseFunction(textBox1.Text));
-            _functions.Add(FuncOpParser.ParseFunction(textBox2.Text));
             FunctionsForm = new FunctionsForm(_functions, this);
-            RefreshFuncs();
         }
 
         private void chart1_Click(object sender, EventArgs e)
@@ -56,7 +50,6 @@ namespace FuncOperationsApplication
         {
             try
             {
-                RefreshFuncs();
                 var f1 = _functions[0];
                 var f2 = _functions[1];
                 var f = Operation(f1,f2);
@@ -76,7 +69,6 @@ namespace FuncOperationsApplication
         {
             try
             {
-                RefreshFuncs();
                 var fpoints = GetPoints(Operation);
                 ShowChart(fpoints);
             }
@@ -86,72 +78,15 @@ namespace FuncOperationsApplication
             }
         }
 
-        private void AddPoint1_Click(object sender, EventArgs e)
-        {
-            if (AddPointForm1 == null)
-            {
-                AddPointForm1 = new AddPointForm(1, this);
-            }
-            AddPointForm1.Show();
-        }
-
-        private void AddPoint2_Click(object sender, EventArgs e)
-        {
-            if (AddPointForm2 == null)
-            {
-                AddPointForm2 = new AddPointForm(2, this);
-            }
-            AddPointForm2.Show();
-        }
-
-        private void Ch1Btn_Click(object sender, EventArgs e)
-        {
-            ShowChart(textBox1.Text);
-        }
-
-        private void Ch2Btn_Click(object sender, EventArgs e)
-        {
-            ShowChart(textBox2.Text);
-        }
-
-        public void AddPoint(PointF point, int id)
-        {
-            TextBox textBox = null;
-            if (id == 1) textBox = textBox1;
-            if (id == 2) textBox = textBox2;
-            if (textBox != null)
-            {
-                textBox.AppendText((string.IsNullOrEmpty(textBox.Text)?"":";") + point.X + " " + point.Y);
-            }
-        }
-
         private void moreFbtn_Click(object sender, EventArgs e)
         {
-            RefreshFuncs();
             FunctionsForm.Show();
         }
 
-        private void RefreshFuncs() 
-        {
-            try
-            {
-                _functions[0] = FuncOpParser.ParseFunction(textBox1.Text);
-                _functions[1] = FuncOpParser.ParseFunction(textBox2.Text);
-            }
-            catch (Exception ex)
-            {
-                LogForm.AddLogMsgLine(ex.Message);
-            }
-
-        }
 
         public void RefreshFuncs(List<Function> funcs)
         {
             _functions = funcs;
-            if (_functions.Count < 2) return;
-
-            textBox1.Text = FuncOpParser.GetFunctionText(_functions[0]);
-            textBox2.Text = FuncOpParser.GetFunctionText(_functions[1]);
         }
 
         private IEnumerable<PointF> GetPoints(Func<Function[], Func<float, float>> Operation)
@@ -162,7 +97,6 @@ namespace FuncOperationsApplication
 
         private void showAllbtn_Click(object sender, EventArgs e)
         {
-            RefreshFuncs();
             ShowCharts(_functions.Select(f => f.Points).ToArray());
         }
 
