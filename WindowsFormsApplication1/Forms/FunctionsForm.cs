@@ -104,8 +104,13 @@ namespace FuncOperationsApplication
         {
             try
             {
-                var f = FuncOpParser.ParseFunction(textBox2.Text);
                 int index = listBox1.SelectedIndex;
+                if (index == -1)
+                {
+                    RefreshValues();
+                    return;
+                }
+                var f = FuncOpParser.ParseFunction(textBox2.Text);
                 _functions[index] = f;
                 RefreshValues();
             }
