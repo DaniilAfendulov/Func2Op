@@ -15,7 +15,8 @@ namespace FuncOperationsApplication
         {
             if (doOptimize) fpoints = OptimizePointsV2(fpoints);
             chart.ChartAreas[0].AxisY.Maximum = 1;
-            var series = chart.Series[seriesName];
+            chart.Series.FindByName(seriesName);
+            var series = chart.Series.FindByName(seriesName);
             if (series == null)
             {
                 AddChart(chart, fpoints, seriesName);
