@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using WindowsFormsApplication1.Forms;
 
 namespace FuncOperationsApplication
 {
@@ -16,6 +17,7 @@ namespace FuncOperationsApplication
         public LogForm LogForm;
         private List<Function> _functions;
         private readonly FunctionsForm  FunctionsForm;
+        private readonly OperationsForm OperationsForm;
         public StartForm()
         {
             InitializeComponent();
@@ -23,6 +25,10 @@ namespace FuncOperationsApplication
             LogForm.Show();
             _functions = new List<Function>();
             FunctionsForm = new FunctionsForm(_functions, this);
+            OperationsForm = new OperationsForm(this);
+            FunctionsForm.Show();
+            OperationsForm.Show();
+
         }
 
         private void chart1_Click(object sender, EventArgs e)
@@ -34,19 +40,9 @@ namespace FuncOperationsApplication
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ShowFuncOpResult(FuncOp.Intersection);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            ShowFuncOpResult(FuncOp.Union);
-        }
 
 
-
-        private void ShowFuncOpResult(Func<Function,Function, Func<float, float>> Operation)
+        public void ShowFuncOpResult(Func<Function,Function, Func<float, float>> Operation)
         {
             try
             {
@@ -57,6 +53,7 @@ namespace FuncOperationsApplication
                 var end = FuncOp.GetMax(p => p.X, f1, f2);
                 int pointsNumber = (int)numericUpDown1.Value;
                 var fpoints = FuncOp.GetFuncPoints(f, start, end, pointsNumber);
+                chart1.Series.Clear();
                 ShowChart(fpoints);
             }
             catch (Exception ex)
@@ -65,11 +62,12 @@ namespace FuncOperationsApplication
             }
         }
 
-        private void ShowFuncOpResult(Func<Function[], Func<float, float>> Operation)
+        public void ShowFuncOpResult(Func<Function[], Func<float, float>> Operation)
         {
             try
             {
                 var fpoints = GetPoints(Operation);
+                chart1.Series.Clear();
                 ShowChart(fpoints);
             }
             catch (Exception ex)
@@ -121,6 +119,11 @@ namespace FuncOperationsApplication
         private void ShowCharts(IEnumerable<PointF>[] fpoints)
         {
             ChartManager.ShowCharts(chart1, fpoints);
+        }
+
+        private void operationsBtn_Click(object sender, EventArgs e)
+        {
+            OperationsForm.Show();
         }
     }
 }

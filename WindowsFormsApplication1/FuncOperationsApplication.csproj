@@ -52,6 +52,12 @@
       <DependentUpon>AddPointForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ChartManager.cs" />
+    <Compile Include="Forms\OperationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OperationsForm.Designer.cs">
+      <DependentUpon>OperationsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\StartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     <Compile Include="Models\TriangleFunc.cs" />
     <EmbeddedResource Include="Forms\AddPointForm.resx">
       <DependentUpon>AddPointForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OperationsForm.resx">
+      <DependentUpon>OperationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
