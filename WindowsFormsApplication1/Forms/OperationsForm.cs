@@ -36,7 +36,7 @@ namespace WindowsFormsApplication1.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            _startForm.GetPointsMidpoint();
         }
     }
 }

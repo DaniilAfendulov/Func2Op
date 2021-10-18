@@ -18,6 +18,7 @@ namespace FuncOperationsApplication
         private List<Function> _functions;
         private readonly FunctionsForm  FunctionsForm;
         private readonly OperationsForm OperationsForm;
+        private IEnumerable<PointF> _currentPoints;
         public StartForm()
         {
             InitializeComponent();
@@ -52,9 +53,9 @@ namespace FuncOperationsApplication
                 var start = FuncOp.GetMin(p => p.X, f1, f2);
                 var end = FuncOp.GetMax(p => p.X, f1, f2);
                 int pointsNumber = (int)numericUpDown1.Value;
-                var fpoints = FuncOp.GetFuncPoints(f, start, end, pointsNumber);
+                _currentPoints = FuncOp.GetFuncPoints(f, start, end, pointsNumber);
                 chart1.Series.Clear();
-                ShowChart(fpoints);
+                ShowChart(_currentPoints);
             }
             catch (Exception ex)
             {
@@ -66,9 +67,9 @@ namespace FuncOperationsApplication
         {
             try
             {
-                var fpoints = GetPoints(Operation);
+                _currentPoints = GetPoints(Operation);
                 chart1.Series.Clear();
-                ShowChart(fpoints);
+                ShowChart(_currentPoints);
             }
             catch (Exception ex)
             {
@@ -113,11 +114,13 @@ namespace FuncOperationsApplication
 
         private void ShowChart(IEnumerable<PointF> fpoints)
         {
+            _currentPoints = fpoints;
             ChartManager.ShowChart(chart1, fpoints);
         }
 
         private void ShowCharts(IEnumerable<PointF>[] fpoints)
         {
+            _currentPoints = fpoints.SelectMany(p => p);
             ChartManager.ShowCharts(chart1, fpoints);
         }
 
@@ -125,5 +128,19 @@ namespace FuncOperationsApplication
         {
             OperationsForm.Show();
         }
+
+        public void GetPointsMidpoint()
+        {
+            float max = _currentPoints.Select(p1 => p1.Y).Max();
+            float x = MidpontHelper.GetPointsMidpoint(_currentPoints.Where(p=> p.Y == max));
+            ChartManager.ShowChart(chart1,new PointF[] { new PointF(x, 0), new PointF(x, max) }, "midpoint");
+        }
+
+
+        public void GetIntervalsMidpoint()
+        {
+
+        }
+
     }
 }
