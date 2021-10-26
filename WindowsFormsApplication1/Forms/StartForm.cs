@@ -131,16 +131,58 @@ namespace FuncOperationsApplication
 
         public void GetPointsMidpoint()
         {
+            if (_currentPoints == null) return;
             float max = _currentPoints.Select(p1 => p1.Y).Max();
-            float x = MidpontHelper.GetPointsMidpoint(_currentPoints.Where(p=> p.Y == max));
+            var f = new Function(_currentPoints.ToArray());
+            var points = FuncOp.GetFuncPoints(f, _currentPoints.Min(p => p.X), _currentPoints.Max(p => p.X), (int)numericUpDown1.Value);
+            float x = MidpontHelper.GetPointsMidpoint(points.Where(p=> p.Y.IsNearlyEqual(max)));
             ChartManager.ShowChart(chart1,new PointF[] { new PointF(x, 0), new PointF(x, max) }, "midpoint");
         }
 
 
         public void GetIntervalsMidpoint()
         {
+            if (_currentPoints == null) return;
+            var points = _currentPoints.ToList();
+            float max = points.Max(p => p.Y);
+            List<Interval> intervals = new List<Interval>();
+            Interval currentInterval = new Interval();
+            if (points[0].Y.IsNearlyEqual(max))
+            {
+                currentInterval.Start = points[0];
+            }
+            for (int i = 1; i < _currentPoints.Count(); i++)
+            {
+                if (i == _currentPoints.Count()-1)
+                {
+                    if (points[i].Y.IsNearlyEqual(max) && points[i-1].Y.IsNearlyEqual(max))
+                    {
+                        currentInterval.End = points[i];
+                        intervals.Add(currentInterval);
+                        break;
+                    }
+                }
 
+                if (points[i].Y.IsNearlyEqual(max))
+                {
+                    if (points[i-1].Y.IsNearlyEqual(max))
+                    {
+                        if (points[i + 1].Y.IsNearlyEqual(max)) continue;
+                        else
+                        {
+                            currentInterval.End = points[i];
+                            intervals.Add(currentInterval);
+                            currentInterval = new Interval();
+                        }
+                    }
+                    else currentInterval.Start = points[i];
+                }
+            }
+
+            float x = MidpontHelper.GetIntervalsMidpoint(intervals);
+            ChartManager.ShowChart(chart1, new PointF[] { new PointF(x, 0), new PointF(x, max) }, "midpoint");
         }
+
 
     }
 }

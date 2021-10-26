@@ -32,6 +32,7 @@ namespace WindowsFormsApplication1.Forms
             this.Interesectionbtn = new System.Windows.Forms.Button();
             this.UnionBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Interesectionbtn
@@ -58,17 +59,28 @@ namespace WindowsFormsApplication1.Forms
             // 
             this.button1.Location = new System.Drawing.Point(12, 41);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 23);
+            this.button1.Size = new System.Drawing.Size(196, 23);
             this.button1.TabIndex = 6;
-            this.button1.Text = "средняя точка";
+            this.button1.Text = "средняя точка по точкам";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(12, 70);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(196, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "средняя точка по интервалам";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // OperationsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 171);
+            this.ClientSize = new System.Drawing.Size(413, 238);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.UnionBtn);
             this.Controls.Add(this.Interesectionbtn);
@@ -83,5 +95,6 @@ namespace WindowsFormsApplication1.Forms
         private System.Windows.Forms.Button Interesectionbtn;
         private System.Windows.Forms.Button UnionBtn;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

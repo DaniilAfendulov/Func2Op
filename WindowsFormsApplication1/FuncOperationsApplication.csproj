@@ -66,6 +66,8 @@
     </Compile>
     <Compile Include="FuncOp.cs" />
     <Compile Include="Models\Function.cs" />
+    <Compile Include="Models\IRule.cs" />
+    <Compile Include="Models\Rule.cs" />
     <Compile Include="NearlyEqualExtension.cs" />
     <Compile Include="Parser\FunctionParser.cs" />
     <Compile Include="Forms\FunctionsForm.cs">

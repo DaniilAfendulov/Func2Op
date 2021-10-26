@@ -38,5 +38,10 @@ namespace WindowsFormsApplication1.Forms
         {
             _startForm.GetPointsMidpoint();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _startForm.GetIntervalsMidpoint();
+        }
     }
 }
