@@ -16,13 +16,13 @@ namespace FuncOperationsApplication
         {
             Points = p;
 
-            Functions = new lf[p.Length+2];
+            Functions = new lf[p.Length+1];
             Functions[0] = x => Points[0].Y;
             for (int i = 0; i < p.Length-1; i++)
             {
                 Functions[i+1] = FuncOp.LineF(Points[i], Points[i + 1]);
             }
-            Functions[p.Length+1] = x => Points[p.Length-1].Y;
+            Functions[p.Length] = x => Points[p.Length-1].Y;
         }
         public lf GetFunc()
         {
