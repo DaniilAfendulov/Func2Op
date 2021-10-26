@@ -19,6 +19,32 @@ namespace FuncOperationsApplication
         public static lf Union(params lf[] functions)
         {
             return x => functions.Select(f => f(x)).Max();
+            #region safe variant
+            //return x => functions.Where(f => IsExist(f, x)).Select(f => f(x)).Max();
+            //return x =>
+            //{
+            //    float max = 0f;
+            //    bool firstFlag = true;
+            //    float y;
+            //    foreach (var f in functions)
+            //    {
+            //        try
+            //        {
+            //            y = f(x);
+            //            if (firstFlag)
+            //            {
+            //                max = y;
+            //                firstFlag = false;
+            //                continue;
+            //            }
+            //            if (y > max) max = y;
+            //        }
+            //        catch { }
+            //    }
+            //    if (!firstFlag) return max;
+            //    throw new ArithmeticException();
+            //};
+            #endregion
         }
 
         public static lf Union(Function f1, params lf[] f2)
@@ -76,13 +102,24 @@ namespace FuncOperationsApplication
         #region GetFuncPoints
         public static IEnumerable<PointF> GetFuncPoints(lf f, float start, float end, int pointsNumber)
         {
-            var step = (end - start) / pointsNumber;
+            float step = (end - start) / pointsNumber;
             var points = new List<PointF>();
+
             points.Add(new PointF(start, f(start)));
-            for (int i = 1; i <= pointsNumber-2; i++)
+
+            for (int i = 1; i <= pointsNumber - 2; i++)
             {
-                var x = start + i * step;
-                points.Add(new PointF(x, f(x)));
+                float x = start + i * step;
+                float y;
+                try
+                {
+                    y = f(x);
+                }
+                catch (Exception)
+                {
+                    y = points.Last().Y;
+                }
+                points.Add(new PointF(x, y));
             }
             points.Add(new PointF(end, f(end)));
             return points;
@@ -134,5 +171,18 @@ namespace FuncOperationsApplication
             return GetMax(selector, fs.ToArray());
         }
         #endregion
+
+        public static bool IsExist(lf f, float x)
+        {
+            try
+            {
+                f(x);
+                return true;
+            }
+            catch(NullReferenceException)
+            {
+                return false;
+            }
+        }
     }
 }
