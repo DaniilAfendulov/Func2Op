@@ -11,6 +11,9 @@ namespace FuncOperationsApplication
     {
         public static float GetPointsMidpoint(IEnumerable<float> x)
         {
+            var pointsx = x.ToArray();
+            var sum = x.Sum();
+            var lenght = x.Count();
             return x.Sum() / x.Count();
         }
         public static float GetPointsMidpoint(IEnumerable<PointF> x)
@@ -20,7 +23,7 @@ namespace FuncOperationsApplication
 
         public static float GetIntervalsMidpoint(IEnumerable<Interval> intervals)
         {
-            return intervals.Select(interval => (float)Math.Sqrt(interval.End.X) - (float)Math.Sqrt(interval.Start.X)).Sum() / intervals.Select(interval => interval.End.X - interval.Start.X).Sum();
+            return intervals.Select(interval => ((float)Math.Pow(interval.End.X,2) - (float)Math.Pow(interval.Start.X,2))/2).Sum() / intervals.Select(interval => interval.End.X - interval.Start.X).Sum();
         }
     }
 }
