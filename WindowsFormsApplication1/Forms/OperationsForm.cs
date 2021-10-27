@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1.Forms
+namespace FuncOperationsApplication.Forms
 {
     public partial class OperationsForm : Form
     {

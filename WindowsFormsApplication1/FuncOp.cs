@@ -73,6 +73,11 @@ namespace FuncOperationsApplication
             return x => Math.Min(f1(x), f2(x));
         }
 
+        public static lf Intersection(params lf[] f)
+        {
+            return x => f.Select(f1 => f1(x)).Min();
+        }
+
         public static lf Intersection(Function f1, lf f2)
         {
             return Intersection(f1.GetFunc(), f2);

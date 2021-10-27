@@ -1,5 +1,5 @@
 ﻿
-namespace WindowsFormsApplication1.Forms
+namespace FuncOperationsApplication.Forms
 {
     partial class OperationsForm
     {

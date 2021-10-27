@@ -7,8 +7,8 @@
     <ProjectGuid>{0BDCAD53-B8C6-403F-9BE6-AFB48ECCF389}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1</RootNamespace>
-    <AssemblyName>WindowsFormsApplication1</AssemblyName>
+    <RootNamespace>FuncOperationsApplication</RootNamespace>
+    <AssemblyName>FuncOperationsApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analys\ComplicatedRule.cs" />
+    <Compile Include="Analys\MembershipFunctionBase.cs" />
+    <Compile Include="Analys\MinRule.cs" />
     <Compile Include="Forms\AddPointForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +71,7 @@
     <Compile Include="Models\Function.cs" />
     <Compile Include="Models\IRule.cs" />
     <Compile Include="Models\Rule.cs" />
+    <Compile Include="Models\SymmetricTriangleFunction.cs" />
     <Compile Include="NearlyEqualExtension.cs" />
     <Compile Include="Parser\FunctionParser.cs" />
     <Compile Include="Forms\FunctionsForm.cs">
@@ -92,6 +96,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\TriangleFunc.cs" />
+    <Compile Include="Analys\IComposedRule.cs" />
+    <Compile Include="Analys\IMembershipFunction.cs" />
+    <Compile Include="Analys\IRule.cs" />
+    <Compile Include="SeasonAnalitics\Models\Mounth.cs" />
+    <Compile Include="SeasonAnalitics\Models\TemperatureMembershipFunction.cs" />
+    <Compile Include="SeasonAnalitics\Models\Weather.cs" />
     <EmbeddedResource Include="Forms\AddPointForm.resx">
       <DependentUpon>AddPointForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,6 +125,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -129,7 +140,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="SeasonAnalitics\SPB2019.txt" />
+    <Content Include="SeasonAnalitics\SPB2020.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
