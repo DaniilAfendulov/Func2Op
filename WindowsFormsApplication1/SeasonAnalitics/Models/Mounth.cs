@@ -2,12 +2,11 @@ namespace FuncOperationsApplication
 {
     public class Mounth
     {
-        public int Number { get; set; } 
+        public int Number { get { return Weather.Mounth; } } 
         public float Weight { get;set; } 
         public Weather Weather {get;set;}
-        public Mounth( float weight, Weather weather)
+        public Mounth(float weight, Weather weather)
         {
-            Number = weather.Mounth;
             Weight = weight;
             Weather = weather;
         }
