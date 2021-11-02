@@ -45,9 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analys\ComplicatedRule.cs" />
     <Compile Include="Analys\MembershipFunctionBase.cs" />
+    <Compile Include="Analys\MembershipResult.cs" />
     <Compile Include="Analys\MinRule.cs" />
+    <Compile Include="Analys\ParamData.cs" />
     <Compile Include="Forms\AddPointForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,12 +97,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\TriangleFunc.cs" />
-    <Compile Include="Analys\IComposedRule.cs" />
     <Compile Include="Analys\IMembershipFunction.cs" />
     <Compile Include="Analys\IRule.cs" />
+    <Compile Include="SeasonAnalitics\DataParser.cs" />
     <Compile Include="SeasonAnalitics\Models\Mounth.cs" />
-    <Compile Include="SeasonAnalitics\Models\TemperatureMembershipFunction.cs" />
+    <Compile Include="SeasonAnalitics\Models\Season.cs" />
+    <Compile Include="SeasonAnalitics\Models\SeasonMembershipFunction.cs" />
     <Compile Include="SeasonAnalitics\Models\Weather.cs" />
+    <Compile Include="SeasonAnalitics\SeasonDataParser.cs" />
     <EmbeddedResource Include="Forms\AddPointForm.resx">
       <DependentUpon>AddPointForm.cs</DependentUpon>
     </EmbeddedResource>

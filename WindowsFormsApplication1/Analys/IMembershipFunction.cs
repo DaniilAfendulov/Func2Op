@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FuncOperationsApplication.SeasonAnalitics.Models;
+using FuncOperationsApplication.Analys;
 
 namespace FuncOperationsApplication
 {
-    public interface IMembershipFunction
+    public interface IMembershipFunction<T>
     {
-        float GetAccuracy(float x);
+        MembershipResult<T>[] GetAccuracy(float x);
     }
 }

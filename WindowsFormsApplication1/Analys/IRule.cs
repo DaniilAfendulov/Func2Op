@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FuncOperationsApplication
 {
-    public interface IRule
+    public interface IRule<T>
     {
-        IMembershipFunction Compose(IMembershipFunction[] functions);
+        IMembershipFunction<T> Compose(IMembershipFunction<T>[] functions);
     }
 }
