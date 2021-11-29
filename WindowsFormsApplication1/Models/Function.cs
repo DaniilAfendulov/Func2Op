@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using lf = System.Func<float, float>;
+using FuncOperationsApplication.Models;
 
 namespace FuncOperationsApplication
 {
-    public class Function
+    public class Function : IRule
     {
         public PointF[] Points;
         public lf[] Functions;

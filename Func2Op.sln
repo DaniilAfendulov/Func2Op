@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncOperationsApplication",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeasonGuessingApp1", "SeasonGuessingApp1\SeasonGuessingApp1.csproj", "{DC360D34-C2FE-456B-A8B7-71F11E56AC47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sugeno", "Sugeno\Sugeno.csproj", "{E6FC8E4E-5FFE-4A61-B366-9DF789DED19B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageRecognition2", "ImageRecognition2\ImageRecognition2.csproj", "{468FE806-1769-4DB2-A644-ADC28B32A604}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{DC360D34-C2FE-456B-A8B7-71F11E56AC47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC360D34-C2FE-456B-A8B7-71F11E56AC47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC360D34-C2FE-456B-A8B7-71F11E56AC47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6FC8E4E-5FFE-4A61-B366-9DF789DED19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6FC8E4E-5FFE-4A61-B366-9DF789DED19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6FC8E4E-5FFE-4A61-B366-9DF789DED19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6FC8E4E-5FFE-4A61-B366-9DF789DED19B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{468FE806-1769-4DB2-A644-ADC28B32A604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{468FE806-1769-4DB2-A644-ADC28B32A604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{468FE806-1769-4DB2-A644-ADC28B32A604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{468FE806-1769-4DB2-A644-ADC28B32A604}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

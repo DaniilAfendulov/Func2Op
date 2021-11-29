@@ -14,7 +14,6 @@ namespace FuncOperationsApplication
         public static void ShowChart(Chart chart, IEnumerable<PointF> fpoints, string seriesName = "Series1", bool doOptimize = true)
         {
             if (doOptimize) fpoints = OptimizePointsV2(fpoints);
-            chart.ChartAreas[0].AxisY.Maximum = 1;
             chart.Series.FindByName(seriesName);
             var series = chart.Series.FindByName(seriesName);
             if (series == null)
@@ -37,7 +36,6 @@ namespace FuncOperationsApplication
 
         public static void ShowCharts(Chart chart, IEnumerable<PointF>[]  chartsPoints)
         {
-            chart.ChartAreas[0].AxisY.Maximum = 1;
             chart.Series.Clear();
             for (int i = 0; i < chartsPoints.Count(); i++)
             {

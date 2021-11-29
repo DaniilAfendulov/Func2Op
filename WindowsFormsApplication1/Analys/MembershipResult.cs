@@ -8,12 +8,14 @@ namespace FuncOperationsApplication.Analys
 {
     public struct MembershipResult<T>
     {
+        private T _answer;
+        private float _accuracy;
         public MembershipResult(T answer, float accuracy)
         {
-            Answer = answer;
-            Accuracy = accuracy;
+            _answer = answer;
+            _accuracy = accuracy;
         }
-        public T Answer { get; }
-        public float Accuracy { get; }
+        public T Answer { get { return _answer; } }
+        public float Accuracy { get { return _accuracy; } }
     }
 }

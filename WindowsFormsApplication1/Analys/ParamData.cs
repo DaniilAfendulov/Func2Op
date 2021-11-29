@@ -15,7 +15,7 @@ namespace FuncOperationsApplication.Analys
         public ParamData(T associatedAnswer, float[] data, string name)
         {
             AssociatedAnswer = associatedAnswer;
-            Data = data ?? throw new ArgumentNullException(nameof(data));
+            Data = data;
             Name = name;
         }
     }
