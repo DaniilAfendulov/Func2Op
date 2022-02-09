@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FuncOperationsApplication.Models
 {
-    class GaussianFunction : IRule
+    public class GaussianFunction : IRule
     {
         private float c, sigma;
         public GaussianFunction(float c, float sigma)

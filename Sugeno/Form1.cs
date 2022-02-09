@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FuncOperationsApplication.Models;
 using FuncOperationsApplication;
+using System.Threading;
 
 namespace Sugeno
 {
     public partial class Form1 : Form
     {
         BuildParams _buildParameters;
+        Mutex _mutex;
         public Form1()
         {
             InitializeComponent();
@@ -122,14 +124,16 @@ namespace Sugeno
             float[] y = new float[stepsAmount+1];
             float[] x = new float[stepsAmount + 1];
             float[] a = new float[stepsAmount + 1];
-            SymmetricTriangleFunction[] membershipFunctions = new SymmetricTriangleFunction[stepsAmount + 1];
+            //SymmetricTriangleFunction[] membershipFunctions = new SymmetricTriangleFunction[stepsAmount + 1];
+            GaussianFunction[] membershipFunctions = new GaussianFunction[stepsAmount + 1];
             Parallel.For(0, stepsAmount, i =>
             {
                 x[i] = start + i * step;
             });
             for (int i = 0; i < x.Length; i++)
             {
-                membershipFunctions[i] = SymmetricTriangleFunction.FactoryMethod(x[i], 1.75f * step, 1, 0);
+                //membershipFunctions[i] = SymmetricTriangleFunction.FactoryMethod(x[i], 1.75f * step, 1, 0);
+                membershipFunctions[i] = new GaussianFunction(x[i], 1.75f * step);
                 y[i] = f(x[i]);
                 a[i] = y[i] / x[i]==0?1:x[i];
             }
@@ -142,7 +146,7 @@ namespace Sugeno
         }
 
 
-        private float FindY(float enteredX,float[] a, float[] x, float[] y,  SymmetricTriangleFunction[] membershipFunctions)
+        private float FindY(float enteredX,float[] a, float[] x, float[] y,  IRule[] membershipFunctions)
         {
             // Второй шаг – Находятся альфы и индивидуальные выходы правил
             float[] y1 = new float[x.Length]; // индивидуальные выходы правил
@@ -184,6 +188,12 @@ namespace Sugeno
 
         private void button2_Click(object sender, EventArgs e)
         {
+            PointF[] result = CorrectFunc();
+            ChartManager.ShowChart(chart123, result, "новое приближение");
+        }
+
+        private PointF[] CorrectFunc()
+        {
             _buildParameters.A = CorrectA(_buildParameters);
             var k = _buildParameters.k;
             var stepsAmount = _buildParameters.stepsAmount;
@@ -194,8 +204,9 @@ namespace Sugeno
                 result[i] = new PointF(xi, FindY(xi, _buildParameters));
             }
             _buildParameters.Y = _buildParameters.FX.Select(x => FindY(x, _buildParameters)).ToArray();
-            ChartManager.ShowChart(chart123, result, "новое приближение");
+            return result;
         }
+
 
         private class BuildParams
         {
@@ -203,9 +214,30 @@ namespace Sugeno
             public float start, step;
             public int stepsAmount, k;
             public float[] FY, FX, A, Y;
-            public SymmetricTriangleFunction[] MembershipFunctions;
+            public IRule[] MembershipFunctions;
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Animate();
+        }
 
+        public void Animate()
+        {
+            using (_mutex = new Mutex())
+            {
+                System.Threading.Timer timer = new System.Threading.Timer(Do, null, 10, TimeSpan.FromSeconds(1).Milliseconds);
+                for (int i = 0; i < 10; i++)
+                {
+                    _mutex.WaitOne();
+                    ChartManager.ShowChart(chart123, CorrectFunc(), "новое приближение");
+                }
+            }
+        }
+
+        public void Do(object pr)
+        {
+            _mutex.ReleaseMutex();
+        }
     }
 }
